@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IR-Guided Ball-Launching Robot — Jones Soosai Rathinam</title>
+<meta name="description" content="A 12 × 12 in., sub-2 kg robot that follows a line, finds an IR beacon by its frequency, drives to it and launches a ball.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project.css">
+<script>window.__imgFail=function(i){if(!i.dataset.t){i.dataset.t=1;i.src=i.src.replace(/\.jpg$/,'.png');return}var f=i.closest('figure');if(f){var g=f.parentNode;f.remove();if(!g.querySelector('figure')){var s=g.closest('.sec');if(s)s.style.display='none'}}else i.remove()}</script>
+</head>
+<body>
+<nav><div class="wrap">
+  <a href="../index.html" class="logo"><svg id="logoGear" viewBox="-12 -12 24 24" aria-hidden="true"><path fill="currentColor"/><circle r="3" fill="var(--bg)"/></svg><b>Jones<span>.</span></b></a>
+  <div class="nav-r"><a href="../index.html#projects" class="keep">All projects</a><a href="../index.html#lab">Lab</a><a href="../index.html#contact">Contact</a><button id="theme" aria-label="Toggle theme">◐</button></div>
+</div></nav>
+
+<main class="wrap">
+  <header class="p-hero">
+    <a class="crumb mono" href="../index.html#projects">← all projects</a>
+    <div class="p-meta mono">MECHATRONICS · PURDUE UNIVERSITY · JAN – MAY 2026</div>
+    <h1>IR-Guided Ball-Launching Robot</h1>
+    <p class="p-sub">A 12 × 12 in., sub-2 kg robot that follows a line, finds an IR beacon by its frequency, drives to it and launches a ball.</p>
+    <div class="facts"><div><small>Course</small><b>Mechatronics, Purdue</b></div><div><small>Timeline</small><b>Jan – May 2026</b></div><div><small>Size limit</small><b>12 × 12 in.</b></div><div><small>Mass limit</small><b>2 kg</b></div></div>
+    <div class="tags"><span class="tag">Arduino Uno R4</span><span class="tag">UART</span><span class="tag">PT204-6B</span><span class="tag">LM393</span><span class="tag">Ultrasonic</span><span class="tag">Encoders</span><span class="tag">Finite state machine</span><span class="tag">PID</span><span class="tag">Flywheel</span></div>
+  </header>
+
+  <div class="cover"><div class="ph mono">// IR · FLYWHEEL</div><img src="../images/ir-ball-robot/cover.jpg" alt="IR-Guided Ball-Launching Robot photo" loading="lazy" onerror="__imgFail(this)"></div>
+  <div class="metrics reveal"><div class="metric"><b>98%</b><small>Single-ball release accuracy</small></div><div class="metric"><b>2000</b><small>RPM flywheel launcher</small></div><div class="metric"><b>6</b><small>State motion controller</small></div><div class="metric"><b>2</b><small>Arduino boards over UART</small></div></div>
+  <section class="sec reveal"><h2>Overview</h2><p class="lead">The robot follows a line, recognizes IR beacons blinking at 750 or 1500 Hz, approaches the target and fires a ball, all within a 12 × 12 in. footprint and a 2 kg limit.</p></section><section class="sec reveal"><h2>Mission flow</h2><div class="flow"><span class="node mono">Line following</span><span class="arr">→</span><span class="node mono hl">Beacon detection</span><span class="arr">→</span><span class="node mono">Target approach</span><span class="arr">→</span><span class="node mono hl">Ball launch</span></div></section><section class="sec reveal"><h2>Architecture</h2><div class="steps"><div class="step"><h3>Split into two subsystems</h3><p>Two Arduino Uno R4 boards, one for the drive and one for the launcher, coordinating over UART so sensing and launching never block each other.</p></div><div class="step"><h3>Designed the IR detection circuit</h3><p>A PT204-6B phototransistor feeds an LM393 comparator, which turns the beacon's light into a clean digital pulse train the microcontroller can time.</p></div><div class="step"><h3>Integrated the sensing</h3><p>Combined ultrasonic ranging for distance and wheel encoders for motion feedback with the IR detector.</p></div><div class="step"><h3>Wrote the controller</h3><p>A 6-state finite state machine moves the robot from line following through 750/1500 Hz beacon detection to target approach and ball launch.</p></div><div class="step"><h3>Built the launcher</h3><p>A 12 V flywheel launcher spinning at 2000 RPM, reaching 98% single-ball release accuracy.</p></div><div class="step"><h3>Laid out the power</h3><p>Separate 12 V and 5 V rails for the motors and logic.</p></div></div></section><section class="sec reveal"><h2>How the robot tells beacons apart</h2><div class="panel"><h3>Beacon frequency discrimination</h3><p class="sub">The comparator output is a square wave. Measuring the time between edges gives the period, and the period says which beacon is in view.</p><canvas id="beacon" style="height:200px"></canvas><div class="row" style="margin-top:12px"><button class="chip-btn on" data-hz="750">750 Hz</button><button class="chip-btn" data-hz="1500">1500 Hz</button><button class="chip-btn" data-hz="0">No beacon</button></div><div class="readout mono"><div><b id="bPer">–</b><small>Period</small></div><div><b id="bFreq">–</b><small>Frequency</small></div><div><b id="bDec">–</b><small>Decision</small></div></div></div></section><section class="sec reveal"><h2>What I learned</h2><p>Real signals are noisy. Getting reliable beacon detection meant debugging the analog front end and the interrupt timing together, because a fault in either one looks the same from the code.</p></section>
+  <section class="sec reveal"><h2>Gallery</h2><div class="gallery"><figure><img src="../images/ir-ball-robot/1.jpg" alt="IR-Guided Ball-Launching Robot photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/ir-ball-robot/2.jpg" alt="IR-Guided Ball-Launching Robot photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/ir-ball-robot/3.jpg" alt="IR-Guided Ball-Launching Robot photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/ir-ball-robot/4.jpg" alt="IR-Guided Ball-Launching Robot photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/ir-ball-robot/5.jpg" alt="IR-Guided Ball-Launching Robot photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/ir-ball-robot/6.jpg" alt="IR-Guided Ball-Launching Robot photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/ir-ball-robot/7.jpg" alt="IR-Guided Ball-Launching Robot photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/ir-ball-robot/8.jpg" alt="IR-Guided Ball-Launching Robot photo" loading="lazy" onerror="__imgFail(this)"></figure></div></section>
+  
+
+  <div class="pn">
+    <a href="turtlebot-nav.html"><small class="mono">← previous</small><b>TurtleBot3 Mapping & Planning</b></a>
+    <a class="nx" href="pump-classifier.html"><small class="mono">next →</small><b>Acoustic Pump-State Classifier</b></a>
+  </div>
+</main>
+
+<footer><div class="wrap mono">© <span id="yr"></span> Jones Soosai Rathinam · West Lafayette, IN</div></footer>
+<div id="lightbox"><img alt=""></div>
+<script src="project.js"></script>
+</body>
+</html>

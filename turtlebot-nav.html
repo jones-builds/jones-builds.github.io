@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TurtleBot3 Exploration, Planning &amp; Tracking — Jones Soosai Rathinam</title>
+<meta name="description" content="A full autonomy stack in simulation: explore an unknown map, localize in it, plan a path and follow it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project.css">
+<script>window.__imgFail=function(i){if(!i.dataset.t){i.dataset.t=1;i.src=i.src.replace(/\.jpg$/,'.png');return}var f=i.closest('figure');if(f){var g=f.parentNode;f.remove();if(!g.querySelector('figure')){var s=g.closest('.sec');if(s)s.style.display='none'}}else i.remove()}</script>
+</head>
+<body>
+<nav><div class="wrap">
+  <a href="../index.html" class="logo"><svg id="logoGear" viewBox="-12 -12 24 24" aria-hidden="true"><path fill="currentColor"/><circle r="3" fill="var(--bg)"/></svg><b>Jones<span>.</span></b></a>
+  <div class="nav-r"><a href="../index.html#projects" class="keep">All projects</a><a href="../index.html#lab">Lab</a><a href="../index.html#contact">Contact</a><button id="theme" aria-label="Toggle theme">◐</button></div>
+</div></nav>
+
+<main class="wrap">
+  <header class="p-hero">
+    <a class="crumb mono" href="../index.html#projects">← all projects</a>
+    <div class="p-meta mono">AUTONOMOUS SYSTEMS · PURDUE UNIVERSITY · AUG – DEC 2025</div>
+    <h1>TurtleBot3 Exploration, Planning & Tracking</h1>
+    <p class="p-sub">A full autonomy stack in simulation: explore an unknown map, localize in it, plan a path and follow it.</p>
+    <div class="facts"><div><small>Course</small><b>Autonomous Systems, Purdue</b></div><div><small>Timeline</small><b>Aug – Dec 2025</b></div><div><small>Platform</small><b>TurtleBot3 · Gazebo</b></div><div><small>Stack</small><b>ROS 2</b></div></div>
+    <div class="tags"><span class="tag">ROS 2</span><span class="tag">Gazebo</span><span class="tag">RViz</span><span class="tag">SLAM Toolbox</span><span class="tag">AMCL</span><span class="tag">Frontier exploration</span><span class="tag">A*</span><span class="tag">Pure pursuit</span><span class="tag">UR3e</span></div>
+  </header>
+
+  <div class="cover"><div class="ph mono">// TURTLEBOT3 · ROS 2</div><img src="../images/turtlebot-nav/cover.jpg" alt="TurtleBot3 Exploration, Planning &amp; Tracking photo" loading="lazy" onerror="__imgFail(this)"></div>
+  <div class="metrics reveal"><div class="metric"><b>2</b><small>ROS 2 packages integrated</small></div><div class="metric"><b>2</b><small>Algorithms implemented</small></div><div class="metric"><b>4</b><small>Autonomy layers</small></div></div>
+  <section class="sec reveal"><h2>Overview</h2><p class="lead">A mobile robot dropped into an unknown space has to answer four questions: <i>Where can I go? Where am I? How do I get there? How do I stay on the path?</i> This project answers each one on a TurtleBot3 in Gazebo.</p></section><section class="sec reveal"><h2>The stack</h2><div class="flow"><span class="node mono">Frontier exploration</span><span class="arr">→</span><span class="node mono">SLAM Toolbox (map)</span><span class="arr">→</span><span class="node mono">AMCL (localize)</span><span class="arr">→</span><span class="node mono hl">A* (plan)</span><span class="arr">→</span><span class="node mono hl">Pure pursuit (track)</span></div></section><section class="sec reveal"><h2>What I did</h2><div class="steps"><div class="step"><h3>Explored and mapped</h3><p>Combined SLAM Toolbox with frontier exploration so the robot drives toward the edges of the known map until the environment is covered.</p></div><div class="step"><h3>Localized</h3><p>Used AMCL to localize the TurtleBot3 on the finished map.</p></div><div class="step"><h3>Planned with A*</h3><p>Implemented A* path planning with replanning when the path is blocked.</p></div><div class="step"><h3>Tracked with pure pursuit</h3><p>Implemented a pure-pursuit controller that steers toward a lookahead point on the path.</p></div></div></section><section class="sec reveal"><h2>Try it</h2><div class="panel"><h3>A* planning + pure-pursuit tracking</h3><p class="sub">Click or drag to draw walls. A* replans instantly (shaded cells = explored), and the robot follows the new path by steering toward a lookahead point.</p><canvas id="astar" style="height:340px"></canvas><div class="readout mono"><div><b id="aLen">–</b><small>Path length</small></div><div><b id="aExp">–</b><small>Nodes expanded</small></div><div><b id="aMs">–</b><small>Solve time</small></div></div><div class="row" style="margin-top:12px"><button class="chip-btn" id="aReset">Default map</button><button class="chip-btn" id="aRand">Random obstacles</button><button class="chip-btn" id="aClear">Clear</button></div></div></section><section class="sec reveal"><h2>Also: UR3e joint trajectories</h2><p>In a robotics lab (ECE 569), I generated joint-angle trajectories for a Universal Robots UR3e and played them back on the arm's model in RViz through a ROS 2 joint publisher, checking the tool path against the intended trajectory before submitting it.</p></section><section class="sec reveal"><h2>What I learned</h2><p>Each layer depends on the one below it. A good planner can't help a robot that is badly localized, and the lookahead distance in pure pursuit is a real trade-off: too short and the robot oscillates, too long and it cuts corners.</p></section>
+  <section class="sec reveal"><h2>Gallery</h2><div class="gallery"><figure><img src="../images/turtlebot-nav/1.jpg" alt="TurtleBot3 Exploration, Planning &amp; Tracking photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/turtlebot-nav/2.jpg" alt="TurtleBot3 Exploration, Planning &amp; Tracking photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/turtlebot-nav/3.jpg" alt="TurtleBot3 Exploration, Planning &amp; Tracking photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/turtlebot-nav/4.jpg" alt="TurtleBot3 Exploration, Planning &amp; Tracking photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/turtlebot-nav/5.jpg" alt="TurtleBot3 Exploration, Planning &amp; Tracking photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/turtlebot-nav/6.jpg" alt="TurtleBot3 Exploration, Planning &amp; Tracking photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/turtlebot-nav/7.jpg" alt="TurtleBot3 Exploration, Planning &amp; Tracking photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/turtlebot-nav/8.jpg" alt="TurtleBot3 Exploration, Planning &amp; Tracking photo" loading="lazy" onerror="__imgFail(this)"></figure></div></section>
+  
+
+  <div class="pn">
+    <a href="qr-sorting-arm.html"><small class="mono">← previous</small><b>QR-Based Conveyor Sorting Arm</b></a>
+    <a class="nx" href="ir-ball-robot.html"><small class="mono">next →</small><b>IR-Guided Ball-Launching Robot</b></a>
+  </div>
+</main>
+
+<footer><div class="wrap mono">© <span id="yr"></span> Jones Soosai Rathinam · West Lafayette, IN</div></footer>
+<div id="lightbox"><img alt=""></div>
+<script src="project.js"></script>
+</body>
+</html>

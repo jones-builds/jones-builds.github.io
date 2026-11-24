@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAPID Hand — Jones Soosai Rathinam</title>
+<meta name="description" content="Assembling, bringing up and teleoperating a 20-actuator open-source dexterous robotic hand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project.css">
+<script>window.__imgFail=function(i){if(!i.dataset.t){i.dataset.t=1;i.src=i.src.replace(/\.jpg$/,'.png');return}var f=i.closest('figure');if(f){var g=f.parentNode;f.remove();if(!g.querySelector('figure')){var s=g.closest('.sec');if(s)s.style.display='none'}}else i.remove()}</script>
+</head>
+<body>
+<nav><div class="wrap">
+  <a href="../index.html" class="logo"><svg id="logoGear" viewBox="-12 -12 24 24" aria-hidden="true"><path fill="currentColor"/><circle r="3" fill="var(--bg)"/></svg><b>Jones<span>.</span></b></a>
+  <div class="nav-r"><a href="../index.html#projects" class="keep">All projects</a><a href="../index.html#lab">Lab</a><a href="../index.html#contact">Contact</a><button id="theme" aria-label="Toggle theme">◐</button></div>
+</div></nav>
+
+<main class="wrap">
+  <header class="p-hero">
+    <a class="crumb mono" href="../index.html#projects">← all projects</a>
+    <div class="p-meta mono">MARS LAB · PURDUE UNIVERSITY · DEC 2025 – PRESENT</div>
+    <h1>RAPID Hand</h1>
+    <p class="p-sub">Assembling, bringing up and teleoperating a 20-actuator open-source dexterous robotic hand.</p>
+    <div class="facts"><div><small>Role</small><b>Robotics Researcher</b></div><div><small>Timeline</small><b>Dec 2025 – Present</b></div><div><small>Lab</small><b>MARS Lab, Purdue</b></div><div><small>Status</small><b>Teleoperation in progress</b></div></div>
+    <div class="tags"><span class="tag">DYNAMIXEL XL330 / XC330</span><span class="tag">U2D2</span><span class="tag">Python</span><span class="tag">DYNAMIXEL SDK</span><span class="tag">Robot bring-up</span><span class="tag">3D printing</span><span class="tag">Fixture design</span><span class="tag">Apple Vision Pro</span></div>
+  </header>
+
+  <div class="cover"><div class="ph mono">// RAPID HAND</div><img src="../images/rapid-hand/cover.jpg" alt="RAPID Hand photo" loading="lazy" onerror="__imgFail(this)"></div>
+  <div class="metrics reveal"><div class="metric"><b>20</b><small>DYNAMIXEL actuators</small></div><div class="metric"><b>4 Mbps</b><small>TTL bus via U2D2</small></div><div class="metric"><b>4</b><small>Fields logged per actuator</small></div><div class="metric"><b>5 mm</b><small>Shaft supports redesigned</small></div></div>
+  <section class="sec reveal"><h2>Overview</h2><p class="lead">The RAPID Hand is an open-source dexterous robotic hand driven by 20 DYNAMIXEL servos. I assembled it in Purdue's MARS Lab and took it from a kit of parts to a hand where every actuator answers on the bus, can be diagnosed and returns to a known pose. Now I'm working on teleoperating it with an Apple Vision Pro.</p></section><section class="sec reveal"><h2>The challenge</h2><p>A 20-servo hand fails in many small ways: a wrong ID, a loose shaft, a voltage drop on a shared bus, two joints that move each other. Before any teleoperation or learning work can happen, every actuator has to be <b>reachable, observable and calibrated</b>, and mechanical problems have to be told apart from control problems.</p></section><section class="sec reveal"><h2>Bus check</h2><div class="panel"><h3>20-actuator bus scan</h3><p class="sub">The same check I run at every power-up: ping each ID on the shared TTL bus and read back its state.</p><div class="bus-grid" id="busGrid"></div><div class="bus-status mono"><span id="busStatus">TTL bus · 4 Mbps · idle</span><button id="busScan">↻ scan</button></div></div></section><section class="sec reveal"><h2>What I did</h2><div class="steps"><div class="step"><h3>Assembled the hand</h3><p>Built the hand and wired 20 XL330 and XC330 servos onto one shared TTL bus.</p></div><div class="step"><h3>Brought up the bus</h3><p>Verified responses from IDs 0–19 at 4 Mbps through a U2D2 interface, confirming every actuator was addressable before running motion.</p></div><div class="step"><h3>Built diagnostics</h3><p>Wrote Python tools with the DYNAMIXEL SDK that log position, voltage, operating mode and hardware errors for each actuator to CSV, so faults are isolated from data instead of guessed.</p></div><div class="step"><h3>Bench-tested motion</h3><p>Sent position commands from Python and documented mechanical coupling between two knuckle axes: moving one joint shifts the other.</p></div><div class="step"><h3>Designed a calibration fixture</h3><p>Designed a 3D-printed fixture that holds the hand in a known pose to record reference positions for all 20 actuators.</p></div><div class="step"><h3>Fixed the mechanics</h3><p>Troubleshooting traced looseness to the bevel-gear supports, so I redesigned them for the 5 mm shafts.</p></div><div class="step live"><h3>Teleoperation</h3><p>Now mapping hand tracking from an Apple Vision Pro to the hand's joint commands.</p></div></div></section><section class="sec reveal"><h2>Results</h2><ul class="bul"><li>All 20 actuators addressable and responding on a single 4 Mbps bus</li><li>Per-actuator CSV logs that make a failing servo, a voltage problem or a mode error visible at a glance</li><li>A repeatable reference pose for calibration, set by the fixture rather than by eye</li><li>Knuckle coupling documented, so it can be compensated in control instead of mistaken for a fault</li><li>Bevel-gear play removed with the redesigned supports</li></ul></section><section class="sec reveal"><h2>What I learned</h2><p>Make the system observable first. Once every actuator reported its own state, most "control" problems turned out to be mechanical: a loose support or a coupled joint. Logging to CSV turned debugging from guesswork into reading a table.</p></section>
+  <section class="sec reveal"><h2>Gallery</h2><div class="gallery"><figure><img src="../images/rapid-hand/1.jpg" alt="RAPID Hand photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/rapid-hand/2.jpg" alt="RAPID Hand photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/rapid-hand/3.jpg" alt="RAPID Hand photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/rapid-hand/4.jpg" alt="RAPID Hand photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/rapid-hand/5.jpg" alt="RAPID Hand photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/rapid-hand/6.jpg" alt="RAPID Hand photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/rapid-hand/7.jpg" alt="RAPID Hand photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/rapid-hand/8.jpg" alt="RAPID Hand photo" loading="lazy" onerror="__imgFail(this)"></figure></div></section>
+  
+
+  <div class="pn">
+    <a href="water-robot.html"><small class="mono">← previous</small><b>Autonomous Water Trash Robot</b></a>
+    <a class="nx" href="cnc-scrap.html"><small class="mono">next →</small><b>Multi-Modal CNC Scrap Analysis</b></a>
+  </div>
+</main>
+
+<footer><div class="wrap mono">© <span id="yr"></span> Jones Soosai Rathinam · West Lafayette, IN</div></footer>
+<div id="lightbox"><img alt=""></div>
+<script src="project.js"></script>
+</body>
+</html>

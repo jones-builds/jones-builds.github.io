@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi-Modal CNC Scrap Analysis — Jones Soosai Rathinam</title>
+<meta name="description" content="Can a production CNC warn you before it makes scrap? Fusing machine, current and acoustic data to find out, and being honest about the answer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project.css">
+<script>window.__imgFail=function(i){if(!i.dataset.t){i.dataset.t=1;i.src=i.src.replace(/\.jpg$/,'.png');return}var f=i.closest('figure');if(f){var g=f.parentNode;f.remove();if(!g.querySelector('figure')){var s=g.closest('.sec');if(s)s.style.display='none'}}else i.remove()}</script>
+</head>
+<body>
+<nav><div class="wrap">
+  <a href="../index.html" class="logo"><svg id="logoGear" viewBox="-12 -12 24 24" aria-hidden="true"><path fill="currentColor"/><circle r="3" fill="var(--bg)"/></svg><b>Jones<span>.</span></b></a>
+  <div class="nav-r"><a href="../index.html#projects" class="keep">All projects</a><a href="../index.html#lab">Lab</a><a href="../index.html#contact">Contact</a><button id="theme" aria-label="Toggle theme">◐</button></div>
+</div></nav>
+
+<main class="wrap">
+  <header class="p-hero">
+    <a class="crumb mono" href="../index.html#projects">← all projects</a>
+    <div class="p-meta mono">KIRBY RISK PRECISION MACHINING · INDUSTRIAL IoT · JAN – MAY 2026</div>
+    <h1>Multi-Modal CNC Scrap Analysis</h1>
+    <p class="p-sub">Can a production CNC warn you before it makes scrap? Fusing machine, current and acoustic data to find out, and being honest about the answer.</p>
+    <div class="facts"><div><small>Partner</small><b>Kirby Risk Precision Machining</b></div><div><small>Timeline</small><b>Jan – May 2026</b></div><div><small>Machine</small><b>MB4000 CNC</b></div><div><small>Role</small><b>Data pipeline & analysis</b></div></div>
+    <div class="tags"><span class="tag">MTConnect</span><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">NumPy</span><span class="tag">XGBoost</span><span class="tag">Current transformer</span><span class="tag">Acoustic sensing</span><span class="tag">Sensor fusion</span></div>
+  </header>
+
+  <div class="cover"><div class="ph mono">// CNC · MTCONNECT</div><img src="../images/cnc-scrap/cover.jpg" alt="Multi-Modal CNC Scrap Analysis photo" loading="lazy" onerror="__imgFail(this)"></div>
+  <div class="metrics reveal"><div class="metric"><b>1.3M+</b><small>MTConnect records</small></div><div class="metric"><b>891</b><small>CNC cycles</small></div><div class="metric"><b>17 min</b><small>Cycle baseline · 3 programs</small></div><div class="metric"><b>96</b><small>Defects analyzed</small></div></div>
+  <section class="sec reveal"><h2>Overview</h2><p class="lead">Scrap on a production CNC is expensive and is usually found after the fact. With Kirby Risk, I tested whether combining the machine's own MTConnect data with physical sensors (current and sound) could predict scrap from a cycle's signature.</p></section><section class="sec reveal"><h2>Pipeline</h2><div class="flow"><span class="node mono">MTConnect</span><span class="arr">→</span><span class="node mono">Current (CT)</span><span class="arr">→</span><span class="node mono">Acoustic</span><span class="arr">→</span><span class="node mono hl">Time alignment</span><span class="arr">→</span><span class="node mono">Cycle segmentation</span><span class="arr">→</span><span class="node mono">Defect labeling</span><span class="arr">→</span><span class="node mono">XGBoost</span><span class="arr">→</span><span class="node mono hl">Findings</span></div></section><section class="sec reveal"><h2>What I did</h2><div class="steps"><div class="step"><h3>Collected three data streams</h3><p>Machine status and spindle load from MTConnect, spindle current from a current transformer, and an acoustic signal from the machine.</p></div><div class="step"><h3>Aligned everything in time</h3><p>Built a Python (pandas, NumPy) pipeline that places all signals on one timeline across 1.3M+ MTConnect records, so each event can be analyzed across every sensor at once.</p></div><div class="step"><h3>Segmented cycles</h3><p>Split the data into 891 machining cycles and set a 17-minute cycle baseline across 3 part programs.</p></div><div class="step"><h3>Traced every defect</h3><p>Matched 96 defects to their root causes: misload, fixture or tooling.</p></div><div class="step"><h3>Modeled scrap</h3><p>Trained XGBoost classifiers on features from the fused signals.</p></div></div></section><section class="sec reveal"><h2>Where the scrap came from</h2><div class="panel"><div class="bars"><div class="bar"><span>Misload</span><div class="track"><div class="fill" data-w="65"></div></div><span>~65%</span></div><div class="bar"><span>Fixture</span><div class="track"><div class="fill" data-w="20"></div></div><span>~20%</span></div><div class="bar"><span>Tooling</span><div class="track"><div class="fill" data-w="16"></div></div><span>~16%</span></div></div><p class="note">Share of the 96 traced defects by root cause (approximate, so it does not sum to exactly 100%).</p></div></section><section class="sec reveal"><h2>Findings</h2><div class="callout"><b>The model learned the shift, not the physics.</b> Scrap labels were recorded per shift, not per part, so the classifier learned which shift a cycle came from instead of tool-failure behavior. That is label leakage, and it makes accuracy look better than it is.</div><p>Even with leakage removed, there were too few examples of each failure mode for reliable prediction. Because most scrap came from misloads and fixtures rather than tool wear, the stronger recommendation was operational: <b>redesign the fixture and improve tool-change practice</b>.</p><p>I presented both limits openly to faculty and the plant's engineers. A model that is honest about what the data can support is more useful to a plant than a high accuracy number that won't hold up.</p></section><section class="sec reveal"><h2>What I learned</h2><p>In industrial ML, how the data is labeled matters as much as the model. The most valuable output was a clear diagnosis of why prediction wasn't ready yet, and what to fix first on the floor.</p></section>
+  <section class="sec reveal"><h2>Gallery</h2><div class="gallery"><figure><img src="../images/cnc-scrap/1.jpg" alt="Multi-Modal CNC Scrap Analysis photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/cnc-scrap/2.jpg" alt="Multi-Modal CNC Scrap Analysis photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/cnc-scrap/3.jpg" alt="Multi-Modal CNC Scrap Analysis photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/cnc-scrap/4.jpg" alt="Multi-Modal CNC Scrap Analysis photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/cnc-scrap/5.jpg" alt="Multi-Modal CNC Scrap Analysis photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/cnc-scrap/6.jpg" alt="Multi-Modal CNC Scrap Analysis photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/cnc-scrap/7.jpg" alt="Multi-Modal CNC Scrap Analysis photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/cnc-scrap/8.jpg" alt="Multi-Modal CNC Scrap Analysis photo" loading="lazy" onerror="__imgFail(this)"></figure></div></section>
+  <section class="sec reveal"><h2>Links</h2><div class="links"><a class="btn primary" href="https://github.com/jones-builds/MultiModal-Scrap-Prediction---Kirby-Risk" target="_blank" rel="noopener">Code on GitHub ↗</a></div></section>
+
+  <div class="pn">
+    <a href="rapid-hand.html"><small class="mono">← previous</small><b>RAPID Hand</b></a>
+    <a class="nx" href="qr-sorting-arm.html"><small class="mono">next →</small><b>QR-Based Conveyor Sorting Arm</b></a>
+  </div>
+</main>
+
+<footer><div class="wrap mono">© <span id="yr"></span> Jones Soosai Rathinam · West Lafayette, IN</div></footer>
+<div id="lightbox"><img alt=""></div>
+<script src="project.js"></script>
+</body>
+</html>

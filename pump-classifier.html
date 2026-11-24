@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acoustic Pump-State Classifier — Jones Soosai Rathinam</title>
+<meta name="description" content="Listening to a vacuum pump and classifying its state live, from a microphone on a Raspberry Pi to a Grafana dashboard.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project.css">
+<script>window.__imgFail=function(i){if(!i.dataset.t){i.dataset.t=1;i.src=i.src.replace(/\.jpg$/,'.png');return}var f=i.closest('figure');if(f){var g=f.parentNode;f.remove();if(!g.querySelector('figure')){var s=g.closest('.sec');if(s)s.style.display='none'}}else i.remove()}</script>
+</head>
+<body>
+<nav><div class="wrap">
+  <a href="../index.html" class="logo"><svg id="logoGear" viewBox="-12 -12 24 24" aria-hidden="true"><path fill="currentColor"/><circle r="3" fill="var(--bg)"/></svg><b>Jones<span>.</span></b></a>
+  <div class="nav-r"><a href="../index.html#projects" class="keep">All projects</a><a href="../index.html#lab">Lab</a><a href="../index.html#contact">Contact</a><button id="theme" aria-label="Toggle theme">◐</button></div>
+</div></nav>
+
+<main class="wrap">
+  <header class="p-hero">
+    <a class="crumb mono" href="../index.html#projects">← all projects</a>
+    <div class="p-meta mono">INDUSTRIAL IoT · PURDUE UNIVERSITY</div>
+    <h1>Acoustic Pump-State Classifier</h1>
+    <p class="p-sub">Listening to a vacuum pump and classifying its state live, from a microphone on a Raspberry Pi to a Grafana dashboard.</p>
+    <div class="facts"><div><small>Course</small><b>Industrial IoT (ME 597), Purdue</b></div><div><small>Hardware</small><b>Raspberry Pi + microphone</b></div><div><small>Model</small><b>CNN on mel-spectrograms</b></div><div><small>Output</small><b>Live Grafana dashboard</b></div></div>
+    <div class="tags"><span class="tag">MTConnect</span><span class="tag">Python</span><span class="tag">Mel-spectrograms</span><span class="tag">CNN</span><span class="tag">Raspberry Pi</span><span class="tag">Grafana</span><span class="tag">FlatBuffers</span></div>
+  </header>
+
+  <div class="cover"><div class="ph mono">// AUDIO · CNN · EDGE</div><img src="../images/pump-classifier/cover.jpg" alt="Acoustic Pump-State Classifier photo" loading="lazy" onerror="__imgFail(this)"></div>
+  <div class="metrics reveal"><div class="metric"><b>3</b><small>Pump states classified</small></div><div class="metric"><b>Live</b><small>Edge inference on a Pi</small></div></div>
+  <section class="sec reveal"><h2>Overview</h2><p class="lead">A failing pump often sounds different before it stops working. This lab built a full condition-monitoring loop: stream a pump's sound over MTConnect, classify its state with a CNN, and show the result live.</p></section><section class="sec reveal"><h2>Pipeline</h2><div class="flow"><span class="node mono">Microphone</span><span class="arr">→</span><span class="node mono">MTConnect adapter</span><span class="arr">→</span><span class="node mono">Agent / collector</span><span class="arr">→</span><span class="node mono hl">Mel-spectrogram</span><span class="arr">→</span><span class="node mono hl">CNN</span><span class="arr">→</span><span class="node mono">Grafana</span></div></section><section class="sec reveal"><h2>The three states</h2><ul class="bul"><li><b>OFF</b>: pump idle</li><li><b>ON – air leaking</b>: running with a leak in the line</li><li><b>ON – vacuum</b>: running and holding vacuum normally</li></ul></section><section class="sec reveal"><h2>What I did</h2><div class="steps"><div class="step"><h3>Streamed audio over MTConnect</h3><p>Configured the adapter and collector scripts to publish the sound stream as MTConnect data.</p></div><div class="step"><h3>Built the features</h3><p>Converted audio chunks into mel-spectrograms, setting the sample rate, chunk size, FFT size and mel-band count to the lab's specification.</p></div><div class="step"><h3>Classified with a CNN</h3><p>Ran a convolutional neural network that labels each spectrogram as one of the three pump states.</p></div><div class="step"><h3>Visualized it live</h3><p>Displayed the predicted state on a Grafana dashboard running on the Raspberry Pi.</p></div><div class="step"><h3>Debugged the plumbing</h3><p>Fixed FlatBuffers compatibility issues and problems in the MTConnect adapter and collector scripts so data flowed end to end.</p></div></div></section><section class="sec reveal"><h2>What I learned</h2><p>The model was the easy part. Most of the work in an IIoT system is getting data reliably from the sensor to the model to the dashboard, and handling the version mismatches between the pieces along the way.</p></section>
+  <section class="sec reveal"><h2>Gallery</h2><div class="gallery"><figure><img src="../images/pump-classifier/1.jpg" alt="Acoustic Pump-State Classifier photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/pump-classifier/2.jpg" alt="Acoustic Pump-State Classifier photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/pump-classifier/3.jpg" alt="Acoustic Pump-State Classifier photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/pump-classifier/4.jpg" alt="Acoustic Pump-State Classifier photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/pump-classifier/5.jpg" alt="Acoustic Pump-State Classifier photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/pump-classifier/6.jpg" alt="Acoustic Pump-State Classifier photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/pump-classifier/7.jpg" alt="Acoustic Pump-State Classifier photo" loading="lazy" onerror="__imgFail(this)"></figure><figure><img src="../images/pump-classifier/8.jpg" alt="Acoustic Pump-State Classifier photo" loading="lazy" onerror="__imgFail(this)"></figure></div></section>
+  
+
+  <div class="pn">
+    <a href="ir-ball-robot.html"><small class="mono">← previous</small><b>IR-Guided Ball-Launching Robot</b></a>
+    <a class="nx" href="hyundai-engine.html"><small class="mono">next →</small><b>Hyundai Kappa Engine Line</b></a>
+  </div>
+</main>
+
+<footer><div class="wrap mono">© <span id="yr"></span> Jones Soosai Rathinam · West Lafayette, IN</div></footer>
+<div id="lightbox"><img alt=""></div>
+<script src="project.js"></script>
+</body>
+</html>
